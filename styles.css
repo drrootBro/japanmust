@@ -144,3 +144,5 @@ h1{font-size:clamp(30px,5vw,46px);line-height:1.18;letter-spacing:-.01em;margin-
 footer{background:var(--ink);color:#999;padding:36px 0;margin-top:40px;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:#ccc;text-decoration:none}
+
+.dish-img{width:100%;max-width:640px;border-radius:12px;margin:0 auto 18px;display:block}
