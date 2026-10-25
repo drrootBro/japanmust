@@ -1,0 +1,37 @@
+# JapanMust
+
+> Practical knowledge for first-time visitors to Japan: how restaurant ordering actually works, what dishes really are, and everyday travel logistics. Written from real experience — no fluff, no listicles.
+
+JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience. Dish explanations tell you what's actually in front of you — not a dictionary guess. The site currently has 10 in-depth guides and 8 explained dishes.
+
+## Guides
+
+- [How to Order Ramen Without Speaking Japanese](https://japanmust.com/guides/how-to-order-ramen/): Ticket machines, seating, the 5 phrases that cover 90% of ramen shops, etiquette.
+- [Izakaya Guide](https://japanmust.com/guides/izakaya-guide/): How Japanese izakaya pubs work — ordering, seating charges, etiquette.
+- [English Menus in Japan](https://japanmust.com/guides/english-menus/): Where to find English menus and what to do when there isn't one.
+- [How to Ask for the Bill](https://japanmust.com/guides/ask-for-bill/): Paying at Japanese restaurants — phrases, cash vs card, no tipping.
+- [Konbini Food Guide](https://japanmust.com/guides/konbini-food/): Making the most of Japanese convenience stores — what to eat, how to pay, microwave etiquette.
+- [No-WiFi Survival Guide](https://japanmust.com/guides/no-wifi-survival/): Staying connected and navigating Japan without WiFi.
+- [How to Read a Japanese Menu](https://japanmust.com/guides/read-japanese-menu/): Decoding Japanese menus — kanji basics, common terms, what the dish actually is.
+- [Sushi Ordering Guide](https://japanmust.com/guides/sushi-ordering/): Ordering sushi in Japan — conveyor belt vs counter, etiquette, useful phrases.
+- [Food Allergies in Japan](https://japanmust.com/guides/food-allergies/): Communicating food allergies in Japanese restaurants — key phrases and what to watch for.
+- [eSIM and Pocket WiFi](https://japanmust.com/guides/esim-pocket-wifi/): Staying connected in Japan — eSIM vs pocket WiFi vs local SIM.
+- [All Guides](https://japanmust.com/guides/): Full index of JapanMust travel guides.
+
+## Dishes, Explained
+
+Not word-for-word translations — what each dish actually is: what's inside, raw or cooked, spicy or not.
+
+- [Oyakodon](https://japanmust.com/dishes/oyakodon/): Chicken and egg rice bowl — what's in it, how it's served.
+- [Tonkotsu Ramen](https://japanmust.com/dishes/tonkotsu-ramen/): Rich pork-bone broth ramen — flavor profile, regional origin, what to expect.
+- [Takoyaki](https://japanmust.com/dishes/takoyaki/): Octopus balls — what's inside, how they're eaten, where to find the best.
+- [Yakitori](https://japanmust.com/dishes/yakitori/): Grilled chicken skewers — cuts, sauce vs salt, how to order.
+- [Gyoza](https://japanmust.com/dishes/gyoza/): Japanese pan-fried dumplings — filling, dipping sauce, how they differ from Chinese jiaozi.
+- [Tempura](https://japanmust.com/dishes/tempura/): Battered and fried seafood/vegetables — what to expect, tentsuyu dipping sauce.
+- [Okonomiyaki](https://japanmust.com/dishes/okonomiyaki/): Savory pancake — Osaka vs Hiroshima style, what's in it.
+- [Karaage](https://japanmust.com/dishes/karaage/): Japanese fried chicken — marinade, how it's served.
+- [All Dishes](https://japanmust.com/dishes/): Full index of explained dishes.
+
+## About
+
+- [JapanMust Home](https://japanmust.com/): Start here — the essentials for first-time visitors to Japan.
