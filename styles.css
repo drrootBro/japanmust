@@ -16,7 +16,7 @@ body{
 }
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 a{color:var(--red)}
-img{max-width:100%}
+img{max-width:100%;height:auto}
 
 /* header */
 .site-header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
