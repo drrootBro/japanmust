@@ -52,7 +52,7 @@ h1{font-size:clamp(30px,5vw,46px);line-height:1.18;letter-spacing:-.01em;margin-
 .screen{background:#20242a;border-radius:28px;overflow:hidden;color:#fff;min-height:480px;
   display:flex;flex-direction:column}
 .viewfinder{flex:1;background:
-  repeating-linear-gradient(0deg,transparent,transparent:34px,rgba(255,255,255,.06) 35px),
+  repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(255,255,255,.06) 35px),
   linear-gradient(160deg,#2b3138,#171a1f);
   position:relative;display:flex;align-items:center;justify-content:center;padding:20px}
 .scan-frame{border:2px dashed rgba(255,255,255,.55);border-radius:10px;padding:14px 18px;text-align:center}
@@ -67,7 +67,7 @@ h1{font-size:clamp(30px,5vw,46px);line-height:1.18;letter-spacing:-.01em;margin-
 
 /* sections */
 .section{padding:52px 0}
-.section h2{font-size:clamp(24px,3.6vw,32px);margin-bottom:10px;letter-spacing:-.01em}
+.section h1,.section h2{font-size:clamp(24px,3.6vw,32px);margin-bottom:10px;letter-spacing:-.01em}
 .section .sub{color:var(--muted);max-width:40em;margin-bottom:28px}
 .cards{display:grid;gap:16px}
 @media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
@@ -146,3 +146,49 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:#ccc;text-decoration:none}
 
 .dish-img{width:100%;max-width:640px;border-radius:12px;margin:0 auto 18px;display:block}
+
+/* ---- long-tail pages: phrase tables, printable allergy card, app CTA ---- */
+.crumbs{font-size:14px;color:var(--muted);margin-bottom:14px}
+.crumbs a{color:var(--muted)}
+.tldr{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:14px 18px;margin:0 0 22px}
+.tldr p{margin:0}
+.phrase-table-wrap{overflow-x:auto;margin:14px 0 20px}
+.phrase-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:15.5px}
+.phrase-table caption{caption-side:top;text-align:left;font-size:13px;color:var(--muted);padding:0 0 6px}
+.phrase-table th,.phrase-table td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+.phrase-table thead th{background:#f1ece3;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.phrase-table td:first-child{font-weight:700}
+.allergy-card{background:#fff;border:3px solid var(--red);border-radius:14px;padding:22px 24px;margin:18px 0 10px;max-width:640px}
+.allergy-card .ac-badge{display:inline-block;background:var(--red);color:#fff;font-weight:800;letter-spacing:.06em;font-size:13px;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.allergy-card .ac-line{margin:0 0 12px}
+.allergy-card .ac-jp{font-size:21px;font-weight:800;line-height:1.45;margin:0}
+.allergy-card .ac-en{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.allergy-card .ac-foot{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:6px}
+.card-actions{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 24px}
+.card-actions button{cursor:pointer;font-family:inherit}
+.notice{background:#fff8f1;border:1px solid #f0d9c4;border-radius:10px;padding:12px 16px;font-size:14.5px;color:#6b4a2a;margin:14px 0}
+.related{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+.related li{margin:0}
+.related a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.related a:hover{border-color:var(--red)}
+.cta-box .micro{margin-top:12px}
+.allergy-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:12px 0 4px}
+.allergy-picker label{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:15px;cursor:pointer}
+@media print{
+  body{background:#fff}
+  .site-header,footer,.article>:not(.print-area){display:none!important}
+  .article{max-width:none;padding:0}
+  .allergy-card.print-area{max-width:none;margin:0;border-width:4px;page-break-inside:avoid}
+  .allergy-card .ac-jp{font-size:26px}
+  .allergy-card .ac-en{font-size:15px}
+}
+
+/* mobile: let header nav wrap instead of widening the page; compact tables */
+@media(max-width:700px){
+  .site-header .wrap{height:auto;min-height:62px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap;gap:10px}
+  .nav{flex-wrap:wrap;row-gap:6px;gap:14px}
+  .phrase-table{font-size:14px}
+  .phrase-table th,.phrase-table td{padding:7px 8px}
+  .allergy-card{padding:18px 16px}
+  .allergy-card .ac-jp{font-size:19px}
+}

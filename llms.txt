@@ -2,7 +2,7 @@
 
 > Practical knowledge for first-time visitors to Japan: how restaurant ordering actually works, what dishes really are, and everyday travel logistics. Written from real experience — no fluff, no listicles.
 
-JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience. Dish explanations tell you what's actually in front of you — not a dictionary guess. The site currently has 10 in-depth guides and 8 explained dishes.
+JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience. Dish explanations tell you what's actually in front of you — not a dictionary guess. The site currently has 23 in-depth guides (including printable Japanese food allergy cards) and 10 explained dishes. JapanMust also builds Japan Interpreter, an offline English-to-Japanese translator app for travelers (launching soon).
 
 ## Guides
 
@@ -16,6 +16,21 @@ JapanMust explains the things that confuse first-time visitors most: restaurant 
 - [Sushi Ordering Guide](https://japanmust.com/guides/sushi-ordering/): Ordering sushi in Japan — conveyor belt vs counter, etiquette, useful phrases.
 - [Food Allergies in Japan](https://japanmust.com/guides/food-allergies/): Communicating food allergies in Japanese restaurants — key phrases and what to watch for.
 - [eSIM and Pocket WiFi](https://japanmust.com/guides/esim-pocket-wifi/): Staying connected in Japan — eSIM vs pocket WiFi vs local SIM.
+### Allergy cards and offline translation
+
+- [Printable Japanese food allergy card (pick your allergens)](https://japanmust.com/guides/japanese-food-allergy-card-printable/): Tick your allergens, print one card, hand it to the staff.
+- [Peanut allergy in Japan: restaurant card & phrases](https://japanmust.com/guides/peanut-allergy-japan-restaurant-card/): Where peanuts hide in Japan, with a restaurant card.
+- [How to say “I’m allergic to shellfish” in Japanese](https://japanmust.com/guides/shellfish-allergy-japanese-phrases/): Shrimp, crab and shellfish phrases plus dishes to watch.
+- [Gluten-free in Japan: restaurant card for celiacs](https://japanmust.com/guides/gluten-free-japan-restaurant-card/): Soy sauce contains wheat, and what to do about it.
+- [Egg allergy in Japan: hidden egg and a restaurant card](https://japanmust.com/guides/egg-allergy-japan-restaurant-card/): Tempura batter, mayo and binders: where egg hides.
+- [Dairy and milk allergy in Japan: restaurant card](https://japanmust.com/guides/dairy-allergy-japan-restaurant-card/): Washoku is mostly dairy-free; curry roux and bread are not.
+- [Soba and buckwheat allergy in Japan](https://japanmust.com/guides/soba-buckwheat-allergy-japan/): Why soba shops are risky and which “soba” is not buckwheat.
+- [Tree nut allergy in Japan: restaurant card](https://japanmust.com/guides/tree-nut-allergy-japan-restaurant-card/): Walnut, almond and cashew words and a restaurant card.
+- [Soy allergy in Japan: soy sauce, miso and tofu](https://japanmust.com/guides/soy-allergy-japan-soy-sauce/): Soy sauce, miso and tofu are everywhere. How to cope.
+- [Does Japanese food contain fish? Dashi, fish allergy & vegetarian](https://japanmust.com/guides/fish-allergy-dashi-japan/): Dashi is fish stock. A guide for fish allergy and vegetarians.
+- [How to read allergen labels on Japanese packaged food](https://japanmust.com/guides/japan-allergen-labels-packaged-food/): Read konbini and supermarket allergen labels in seconds.
+- [Japan offline translator: translating with no WiFi](https://japanmust.com/guides/japan-offline-translator-no-wifi/): Set up translation that works with no signal.
+- [How to translate a Japanese menu with your camera](https://japanmust.com/guides/translate-japanese-menu-offline-camera/): Photo tips and allergen words to check on every scan.
 - [All Guides](https://japanmust.com/guides/): Full index of JapanMust travel guides.
 
 ## Dishes, Explained
@@ -30,6 +45,8 @@ Not word-for-word translations — what each dish actually is: what's inside, ra
 - [Tempura](https://japanmust.com/dishes/tempura/): Battered and fried seafood/vegetables — what to expect, tentsuyu dipping sauce.
 - [Okonomiyaki](https://japanmust.com/dishes/okonomiyaki/): Savory pancake — Osaka vs Hiroshima style, what's in it.
 - [Karaage](https://japanmust.com/dishes/karaage/): Japanese fried chicken — marinade, how it's served.
+- [Natto](https://japanmust.com/dishes/natto/): Fermented soybeans — taste, how to eat it, soy allergy notes.
+- [Katsudon](https://japanmust.com/dishes/katsudon/): Breaded pork cutlet and egg over rice — ingredients and allergens.
 - [All Dishes](https://japanmust.com/dishes/): Full index of explained dishes.
 
 ## About
