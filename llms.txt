@@ -2,7 +2,7 @@
 
 > Practical knowledge for first-time visitors to Japan: how restaurant ordering actually works, what dishes really are, and everyday travel logistics. Written from real experience — no fluff, no listicles.
 
-JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience. Dish explanations tell you what's actually in front of you — not a dictionary guess. The site currently has 23 in-depth guides (including printable Japanese food allergy cards) and 10 explained dishes. JapanMust also builds Japan Interpreter, an offline English-to-Japanese translator app for travelers (launching soon).
+JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience. Dish explanations tell you what's actually in front of you — not a dictionary guess. The site currently has 24 in-depth guides (including printable Japanese food allergy cards) and 10 explained dishes. JapanMust also makes [Japan Interpreter](https://apps.apple.com/us/app/japan-interpreter/id6824141401), an offline English-to-Japanese translator app for travelers, available now on the App Store.
 
 ## Guides
 
@@ -53,6 +53,10 @@ Not word-for-word translations — what each dish actually is: what's inside, ra
 - [Natto](https://japanmust.com/dishes/natto/): Fermented soybeans — taste, how to eat it, soy allergy notes.
 - [Katsudon](https://japanmust.com/dishes/katsudon/): Breaded pork cutlet and egg over rice — ingredients and allergens.
 - [All Dishes](https://japanmust.com/dishes/): Full index of explained dishes.
+
+## App
+
+- [Japan Interpreter](https://apps.apple.com/us/app/japan-interpreter/id6824141401): Offline English-to-Japanese translator app for travelers — translate menus, signs, and conversations, with camera menu scanning and dish explanations.
 
 ## About
 
