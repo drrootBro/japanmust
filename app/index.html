@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Interpreter App — Read Japanese Menus, Signs &amp; Conversations — JapanMust</title>
+<meta name="description" content="Japan Interpreter is a free iPhone app for travelers in Japan: photograph a menu and get plain-English dish explanations, translate text and speech between English and Japanese, and keep working offline.">
+<link rel="canonical" href="https://japanmust.com/app/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:site_name" content="JapanMust">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Japan Interpreter App — Read Japanese Menus, Signs &amp; Conversations">
+<meta property="og:description" content="A free iPhone translator for Japan trips: camera menu translation with dish explanations, text and voice translation, offline support.">
+<meta property="og:url" content="https://japanmust.com/app/">
+<meta property="og:image" content="https://japanmust.com/assets/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  /* JapanMust app page v1 — same design language as homepage v2:
+     modern flow layout, pure CSS, self-contained, system fonts. */
+  :root{
+    --red:#d9261c; --ink:#1a1a1a; --muted:#5c5c5c; --paper:#faf7f2;
+    --card:#ffffff; --line:#e8e2d8; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:17px}
+  a{color:var(--red)}
+  img{max-width:100%;height:auto}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .wrap-wide{max-width:1240px;margin:0 auto;padding:0 20px}
+
+  /* header (same as live) */
+  .site-header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .site-header .wrap{max-width:1240px;display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+  .logo span{color:var(--red)}
+  .nav{display:flex;gap:18px;align-items:center}
+  .nav a{color:var(--muted);text-decoration:none;font-size:15px}
+  .nav a:hover{color:var(--ink)}
+  @media(max-width:700px){
+    .site-header .wrap{height:auto;min-height:62px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap;gap:10px}
+    .nav{flex-wrap:wrap;row-gap:6px;gap:14px}
+  }
+
+  /* buttons (same as live) */
+  .btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--red);transition:background .15s,border-color .15s,color .15s;font-size:16px}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:#b71f15;border-color:#b71f15}
+  .btn-ghost{background:transparent;color:var(--red)}
+  .btn-ghost:hover{background:#fdeeea}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .micro{font-size:14px;color:var(--muted);margin-top:14px}
+
+  /* flowing sections */
+  .section{padding:88px 0}
+  .section h2{font-size:clamp(30px,4.4vw,44px);line-height:1.15;letter-spacing:-.015em;margin-bottom:14px}
+  .section .sub{color:var(--muted);font-size:18.5px;max-width:38em;margin-bottom:36px}
+  .body-copy{color:var(--muted);font-size:18px;margin-bottom:18px}
+  .photo-caption{color:var(--muted);font-size:.85rem;margin-top:10px}
+
+  /* app hero: name, one-line positioning, download, main screen */
+  .app-hero{padding:76px 0 88px}
+  .app-hero h1{font-size:clamp(38px,5.6vw,62px);line-height:1.1;letter-spacing:-.015em;margin-bottom:20px;max-width:11em}
+  .app-hero .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);line-height:1.6;max-width:34em}
+
+  /* alternating text / photo rows */
+  .flow-row{display:grid;gap:34px;align-items:center}
+  @media(min-width:860px){
+    .flow-row{grid-template-columns:1fr 1fr;gap:56px}
+    .flow-row.flip .flow-text{order:2}
+    .flow-row.flip .flow-photo{order:1}
+    .flow-row.narrow-photo{grid-template-columns:1.15fr .85fr}
+  }
+  .flow-photo img{width:100%;height:auto;display:block;border-radius:18px}
+
+  /* phone screenshots: quiet frame, no marketing chrome */
+  .shot{max-width:340px;margin:0 auto}
+  .shot img{width:100%;height:auto;display:block;border-radius:26px;border:1px solid var(--line);box-shadow:0 18px 44px rgba(26,26,26,.13)}
+  .shot-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:0 auto}
+  .shot-pair img{width:100%;height:auto;display:block;border-radius:22px;border:1px solid var(--line);box-shadow:0 14px 34px rgba(26,26,26,.12)}
+  .shot figcaption,.shot-pair-wrap figcaption{color:var(--muted);font-size:.85rem;margin-top:12px;text-align:center}
+
+  /* how-to steps: numbered quiet rows */
+  .steps{display:grid;gap:0}
+  @media(min-width:860px){.steps{grid-template-columns:repeat(3,1fr);gap:56px}}
+  .step{padding:28px 0 8px;border-top:1px solid var(--line)}
+  .step .num{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:18px;margin-bottom:14px}
+  .step h3{font-size:21px;line-height:1.3;margin-bottom:8px}
+  .step p{font-size:16px;color:var(--muted)}
+
+  /* offline honesty lists */
+  .check-list{list-style:none;margin:0;padding:0}
+  .check-list li{padding:15px 0 15px 30px;border-top:1px solid var(--line);position:relative;font-size:16.5px;color:var(--muted)}
+  .check-list li strong{color:var(--ink);display:block;font-size:17px}
+  .check-list li::before{content:"—";position:absolute;left:2px;color:var(--red);font-weight:800}
+  .check-list.yes li::before{content:"✓"}
+
+  /* knowledge list (drawn from the site's guides) */
+  .link-list{list-style:none;margin:0;padding:0}
+  .link-list li{padding:20px 0;border-bottom:1px solid var(--line)}
+  .link-list li:first-child{border-top:1px solid var(--line)}
+  .link-list a{font-weight:650;font-size:18.5px}
+  .link-list p{margin:5px 0 0;color:var(--muted)}
+
+  /* pricing shot runs smaller */
+  .shot.small{max-width:280px}
+
+  /* faq (same behaviour as live) */
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:18px 20px}
+  .faq summary{font-weight:700;cursor:pointer;font-size:16.5px}
+  .faq details p{margin-top:10px;color:var(--muted);font-size:15.5px}
+
+  /* dark closing band */
+  .app-band{background:var(--ink);color:#eee}
+  .app-band h2{color:#fff}
+  .app-band .sub{color:#c9c4bb}
+  .app-band .micro{color:#a49e94}
+
+  /* footer (same as live) */
+  footer{background:var(--ink);color:#999;padding:44px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer a{color:#ccc;text-decoration:none}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "JapanMust",
+     "item": "https://japanmust.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Japan Interpreter App",
+     "item": "https://japanmust.com/app/"
+    }
+   ]
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://japanmust.com/app/#app",
+   "name": "Japan Interpreter",
+   "applicationCategory": "TravelApplication",
+   "operatingSystem": "iOS 15.5 or later",
+   "description": "Free English-to-Japanese translator app for travelers in Japan: photograph a menu and get plain-English dish explanations, translate text and speech in both directions, and keep working offline with downloaded language resources.",
+   "url": "https://japanmust.com/app/",
+   "downloadUrl": "https://apps.apple.com/us/app/japan-interpreter/id6824141401",
+   "inLanguage": [
+    "en",
+    "ja"
+   ],
+   "author": {
+    "@type": "Organization",
+    "name": "AIBC International LLC"
+   },
+   "publisher": {
+    "@id": "https://japanmust.com/#org"
+   },
+   "screenshot": [
+    "https://japanmust.com/app/app-shot-home.jpg",
+    "https://japanmust.com/app/app-shot-camera.jpg",
+    "https://japanmust.com/app/app-shot-text.jpg",
+    "https://japanmust.com/app/app-shot-voice.jpg"
+   ],
+   "featureList": [
+    "Text translation between English and Japanese",
+    "Camera and menu translation with dish explanations",
+    "Point & Ask camera translation for signs and printed text",
+    "Voice interpreter for conversations",
+    "Offline support with downloaded language resources"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to download. Optional Lifetime audio unlock available as a one-time in-app purchase (US $6.99)."
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Does Japan Interpreter work without WiFi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Text and camera translation run on your phone using language resources you download in advance, so they keep working offline once set up. Download the Japanese resources on WiFi before your trip. Voice recognition offline depends on your phone, operating system and language, so test it before you travel."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How much does Japan Interpreter cost?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Basic features stay free. A 120-hour full-feature trial starts with your first translation, and microphone translation afterwards needs Lifetime Premium, a one-time purchase (US reference price $6.99) with no subscription."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can the app tell me which dishes contain allergens?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is built to explain menu items and flag common allergens, but a menu description is never a guarantee of what is in the food. For a serious allergy, always show the restaurant a written allergy card and confirm with staff."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which phones does Japan Interpreter run on?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Japan Interpreter runs on iPhone with iOS 15.5 or later. It is made by AIBC International LLC and is free to download from the App Store. The optional Lifetime audio unlock is a one-time purchase, not a subscription."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What can I use the voice interpreter for?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Speak into the phone and it translates between English and Japanese in both directions. Travelers use it for the short conversations that come up at restaurants, hotels, shops and stations — asking what is in a dish, where the platform is, or whether a seat is free."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script src="/assets/app-cta.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">Japan<span>Must</span></a>
+    <nav class="nav">
+      <a href="/guides/">Guides</a>
+      <a href="/dishes/">Dishes</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/support/">Support</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="app-hero">
+  <div class="wrap-wide">
+    <div class="flow-row narrow-photo">
+      <div class="flow-text">
+        <h1>Japan Interpreter: the translator app for eating and getting around in Japan</h1>
+        <p class="lede">Japan Interpreter translates between English and Japanese for the moments a trip actually turns on: a menu with no pictures, a sign you can't read, a question you need to ask out loud. Photograph the menu and it explains each dish in plain English — what it is, not just what it's called — and the core tools keep working with no WiFi.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401" data-app-cta>Download on the App Store</a>
+          <a class="btn btn-ghost" href="#how-it-works">How it works ↓</a>
+        </div>
+        <p class="micro">Free to download · iPhone, iOS 15.5 or later · by AIBC International LLC</p>
+      </div>
+      <figure class="shot">
+        <img src="app-shot-home.jpg" alt="Japan Interpreter home screen with four tools: Text, Camera, Voice and Knowledge" width="458" height="996" fetchpriority="high">
+        <figcaption>One home screen, four tools: Text, Camera, Voice, Knowledge.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap-wide">
+    <h2>What it does</h2>
+    <p class="sub">Four tools, each built for a specific moment on a Japan trip.</p>
+
+    <div class="flow-row narrow-photo">
+      <div class="flow-text">
+        <h3 style="font-size:26px;margin-bottom:10px">Camera &amp; menu translation</h3>
+        <p class="body-copy">Take a photo of a Japanese menu and the app reads it, then explains the dishes in plain English — hamburger steak is hamburger steak, not a string of kanji you're meant to guess at. Common allergens are flagged as you go.</p>
+        <p class="body-copy">The same camera works beyond menus: point it at any Japanese text — a sign, a ticket machine, a food label — and Point &amp; Ask gives you the translation. That's the tool you reach for a dozen times a day.</p>
+      </div>
+      <figure class="shot">
+        <img src="app-shot-camera.jpg" alt="Japan Interpreter camera screen reading a Japanese lunch menu and explaining dishes in English, including hamburger steak and chicken with green onion sauce" width="378" height="732" loading="lazy">
+        <figcaption>A lunch menu, read and explained dish by dish.</figcaption>
+      </figure>
+    </div>
+
+    <div class="flow-row flip narrow-photo" style="margin-top:84px">
+      <div class="flow-text">
+        <h3 style="font-size:26px;margin-bottom:10px">Text translation</h3>
+        <p class="body-copy">Type or paste in either direction — English to Japanese when you need to show someone a sentence, Japanese to English when a message, sign or label needs reading. Simple, fast, and it works on the resources already on your phone, so a dead signal doesn't stop it.</p>
+      </div>
+      <figure class="shot">
+        <img src="app-shot-text.jpg" alt="Japan Interpreter text screen translating 'where is the nearest train station' from English into Japanese" width="370" height="808" loading="lazy">
+        <figcaption>"Where is the nearest train station," in Japanese, ready to show.</figcaption>
+      </figure>
+    </div>
+
+    <div class="flow-row narrow-photo" style="margin-top:84px">
+      <div class="flow-text">
+        <h3 style="font-size:26px;margin-bottom:10px">Voice interpreter</h3>
+        <p class="body-copy">Some things can't be pointed at. Speak into the phone and it translates your sentence out loud, in both directions — English to Japanese when you're asking, Japanese to English when staff answer. It's made for the short exchanges of a trip: restaurants, hotels, shops, stations.</p>
+        <p class="body-copy">The two screens here are real: "How are you today" going out in Japanese, and a spoken "thank you" coming back in English.</p>
+      </div>
+      <figure class="shot-pair-wrap">
+        <div class="shot-pair">
+          <img src="app-shot-voice.jpg" alt="Japan Interpreter voice screen translating the spoken English phrase 'How are you today' into Japanese" width="458" height="996" loading="lazy">
+          <img src="app-shot-voice-ja.jpg" alt="Japan Interpreter voice screen translating spoken Japanese, arigatou gozaimasu, into 'Thank you' in English" width="458" height="996" loading="lazy">
+        </div>
+        <figcaption>Voice works both ways: you ask in English, they answer in Japanese.</figcaption>
+      </figure>
+    </div>
+
+    <div class="flow-row" style="margin-top:84px">
+      <div class="flow-text">
+        <h3 style="font-size:26px;margin-bottom:10px">Knowledge built in</h3>
+        <p class="body-copy">Translation tells you what a dish is called. Knowledge tells you what it actually is — what's inside, raw or cooked, spicy or not, and where allergens like peanut, sesame or wheat tend to hide. The app carries the same dish explanations and ordering know-how as this site's guides, so the answer is in your pocket at the table, not back at the hotel.</p>
+        <p class="body-copy">New to the whole problem? Start with the guide this app grew out of: <a href="/guides/without-speaking-japanese/">visiting Japan without speaking Japanese</a>.</p>
+      </div>
+      <div>
+        <ul class="link-list">
+          <li>
+            <a href="/dishes/">Dishes, explained</a>
+            <p>What each dish actually is: ingredients, cooking method, heat.</p>
+          </li>
+          <li>
+            <a href="/guides/japanese-food-allergy-card-printable/">Printable allergy cards</a>
+            <p>Pick your allergens, print one card, hand it to the staff.</p>
+          </li>
+          <li>
+            <a href="/guides/how-to-order-ramen/">How to order ramen</a>
+            <p>Ticket machines and the phrases that cover most ramen shops.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works" style="padding-top:0">
+  <div class="wrap-wide">
+    <h2>How it works</h2>
+    <p class="sub">Three steps, and the only one that needs WiFi happens before you leave home.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <h3>Download it — and the Japanese resources</h3>
+        <p>Get the app from the App Store, then download the Japanese language resources while you're still on home WiFi. That one download is what makes the rest work offline.</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <h3>At the restaurant, point the camera at the menu</h3>
+        <p>Open Camera, take a photo of the menu, and read the dishes in English — with explanations and allergen flags, not just names.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <h3>Order, or ask out loud</h3>
+        <p>Point at the dish to order it, or switch to Voice and ask your question — what's in this, is there a table, where's the platform — and hear the answer translated back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap-wide">
+    <h2>Offline, honestly</h2>
+    <p class="sub">"Works offline" gets promised loosely by translator apps. Here is exactly what it means for this one.</p>
+    <div class="flow-row" style="align-items:start">
+      <div>
+        <h3 style="font-size:22px;margin-bottom:12px">Works with no connection</h3>
+        <ul class="check-list yes">
+          <li><strong>Text translation</strong>Runs on the language resources you downloaded before the trip.</li>
+          <li><strong>Camera &amp; menu translation</strong>Reads menus and signs from the same on-phone resources once they're set up.</li>
+          <li><strong>Knowledge</strong>The dish explanations and guides on your phone don't need a signal.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:22px;margin-bottom:12px">Depends on your phone — test it first</h3>
+        <ul class="check-list">
+          <li><strong>Voice recognition</strong>Whether speech recognition works offline depends on your phone, its operating system and the language. Some features require a connection.</li>
+          <li><strong>The fix is simple</strong>Before you fly, switch your phone to airplane mode and try the voice tool once. If it works in the kitchen, it works in Kyoto.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap-wide">
+    <div class="flow-row narrow-photo">
+      <div class="flow-text">
+        <h2>What it costs</h2>
+        <p class="body-copy">The app is free to download, and the everyday tools stay free: <strong>text translation, camera and menu translation, Point &amp; Ask, and the travel knowledge</strong>. No account, no subscription, nothing ticking monthly.</p>
+        <p class="body-copy">Audio is the one paid extra. Voice features start with a full-feature trial of 120 hours (five days) from your first translation. After that, the Lifetime unlock is a <strong>one-time US $6.99 purchase</strong> — pay once, no subscription, no automatic renewal, and you can restore the purchase on a new phone.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401" data-app-cta>Download on the App Store</a>
+        </div>
+        <p class="micro">US App Store price shown; your store's price may differ slightly.</p>
+      </div>
+      <figure class="shot small">
+        <img src="app-shot-paywall.jpg" alt="Japan Interpreter purchase screen: Unlock Lifetime Audio for a one-time $6.99 purchase, no subscription" width="458" height="996" loading="lazy">
+        <figcaption>The actual purchase screen: $6.99 once, no subscription.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <div class="faq" style="margin-top:28px">
+      <details><summary>Does Japan Interpreter work without WiFi?</summary><p>Text and camera translation run on your phone using language resources you download in advance, so they keep working offline once set up. Download the Japanese resources on WiFi before your trip. Voice recognition offline depends on your phone, operating system and language, so test it before you travel.</p></details>
+      <details><summary>How much does Japan Interpreter cost?</summary><p>Basic features stay free. A 120-hour full-feature trial starts with your first translation, and microphone translation afterwards needs Lifetime Premium, a one-time purchase (US reference price $6.99) with no subscription.</p></details>
+      <details><summary>Can the app tell me which dishes contain allergens?</summary><p>It is built to explain menu items and flag common allergens, but a menu description is never a guarantee of what is in the food. For a serious allergy, always show the restaurant a written allergy card and confirm with staff.</p></details>
+      <details><summary>Which phones does Japan Interpreter run on?</summary><p>Japan Interpreter runs on iPhone with iOS 15.5 or later. It is made by AIBC International LLC and is free to download from the App Store. The optional Lifetime audio unlock is a one-time purchase, not a subscription.</p></details>
+      <details><summary>What can I use the voice interpreter for?</summary><p>Speak into the phone and it translates between English and Japanese in both directions. Travelers use it for the short conversations that come up at restaurants, hotels, shops and stations — asking what is in a dish, where the platform is, or whether a seat is free.</p></details>
+    </div>
+    <p class="micro" style="margin-top:22px">More about the trip itself: <a href="/guides/">browse the guides</a> or go back to the <a href="/">JapanMust home page</a>.</p>
+  </div>
+</section>
+
+<section class="section app-band">
+  <div class="wrap" style="text-align:left">
+    <h2>Going to Japan? Take the interpreter with you.</h2>
+    <p class="sub" style="margin-bottom:0">Download it at home, download the Japanese resources on your own WiFi, and the menus of Japan stop being a guessing game.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401" data-app-cta>Download on the App Store</a>
+    </div>
+    <p class="micro">Free to download · iPhone, iOS 15.5 or later · Core tools stay free</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 JapanMust · Japan travel knowledge</div>
+    <div><a href="/guides/">Guides</a> · <a href="/dishes/">Dishes</a> · <a href="/privacy/">Privacy</a> · <a href="/support/">Support</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@japanmust.com">Contact</a></div>
+    <a href="https://itravelnet.com/" title="itravelnet.com - Travel directory">itravelnet.com</a> ·
+<a href="https://bookmarktravel.com/" title="bookmarktravel.com - A directory of all things travel">bookmarktravel.com</a>
+
+  </div>
+</footer>
+</body>
+</html>
