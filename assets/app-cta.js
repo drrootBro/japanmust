@@ -6,7 +6,7 @@
       swap for a waitlist form URL whenever you have one). */
 (function () {
   var CONFIG = {
-    APP_STORE_URL: "",   // e.g. "https://apps.apple.com/app/idXXXXXXXXXX"  (empty = not launched yet)
+    APP_STORE_URL: "https://apps.apple.com/us/app/japan-interpreter/id6824141401"   // e.g. "https://apps.apple.com/app/idXXXXXXXXXX"  (empty = not launched yet)
     NOTIFY_URL: "mailto:hello@japanmust.com?subject=Notify%20me%20when%20Japan%20Interpreter%20launches"
   };
 
