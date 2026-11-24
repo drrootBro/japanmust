@@ -17,7 +17,138 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/styles.css">
+<style>
+  /* JapanMust v2 demo — modern flow layout, pure CSS, self-contained.
+     Design tokens and base components carried over from the live styles.css. */
+  :root{
+    --red:#d9261c; --ink:#1a1a1a; --muted:#5c5c5c; --paper:#faf7f2;
+    --card:#ffffff; --line:#e8e2d8; --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;font-size:17px}
+  a{color:var(--red)}
+  img{max-width:100%;height:auto}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .wrap-wide{max-width:1240px;margin:0 auto;padding:0 20px}
+
+  /* header (same as live) */
+  .site-header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .site-header .wrap{max-width:1240px;display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+  .logo span{color:var(--red)}
+  .nav{display:flex;gap:18px;align-items:center}
+  .nav a{color:var(--muted);text-decoration:none;font-size:15px}
+  .nav a:hover{color:var(--ink)}
+  @media(max-width:700px){
+    .site-header .wrap{height:auto;min-height:62px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap;gap:10px}
+    .nav{flex-wrap:wrap;row-gap:6px;gap:14px}
+  }
+
+  /* buttons (same as live, plus a light variant for use on photos) */
+  .btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--red);transition:background .15s,border-color .15s,color .15s;font-size:16px}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{background:#b71f15;border-color:#b71f15}
+  .btn-ghost{background:transparent;color:var(--red)}
+  .btn-ghost:hover{background:#fdeeea}
+  .btn-light{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.85)}
+  .btn-light:hover{background:rgba(255,255,255,.22)}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+  /* full-bleed hero: photo fills the viewport, headline sits on it */
+  .hero{position:relative;min-height:min(94vh,880px);display:flex;align-items:flex-end;overflow:hidden;background:#14100d}
+  .hero-media{position:absolute;inset:0}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,9,7,.34) 0%,rgba(12,9,7,.08) 34%,rgba(12,9,7,.55) 68%,rgba(12,9,7,.88) 100%)}
+  .hero-inner{position:relative;z-index:2;width:100%;padding:120px 0 34px}
+  .hero h1{color:#fff;font-size:clamp(38px,6.2vw,68px);line-height:1.08;letter-spacing:-.015em;max-width:12.5em;margin-bottom:20px;text-shadow:0 2px 22px rgba(0,0,0,.45)}
+  .hero .lede{color:#f4efe8;font-size:clamp(17px,2vw,20.5px);line-height:1.6;max-width:36em;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+  .hero-caption{margin-top:44px;color:rgba(255,255,255,.78);font-size:.85rem;text-align:right;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+
+  /* flowing sections */
+  .section{padding:88px 0}
+  .section h2{font-size:clamp(30px,4.4vw,44px);line-height:1.15;letter-spacing:-.015em;margin-bottom:14px}
+  .section .sub{color:var(--muted);font-size:18.5px;max-width:38em;margin-bottom:36px}
+  .body-copy{color:var(--muted);font-size:18px;margin-bottom:18px}
+  .photo-caption{color:var(--muted);font-size:.85rem;margin-top:10px}
+  .band-caption{color:rgba(255,255,255,.85);font-size:.85rem;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+
+  /* alternating text / photo rows */
+  .flow-row{display:grid;gap:34px;align-items:center}
+  @media(min-width:860px){
+    .flow-row{grid-template-columns:1fr 1fr;gap:56px}
+    .flow-row.flip .flow-text{order:2}
+    .flow-row.flip .flow-photo{order:1}
+  }
+  .flow-photo img{width:100%;height:auto;display:block;border-radius:18px}
+
+  /* full-width photo band */
+  .photo-band{position:relative;height:clamp(320px,58vh,540px);overflow:hidden}
+  .photo-band img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo-band .band-caption{position:absolute;right:22px;bottom:16px}
+
+  /* recently added: editorial index, no cards */
+  .updates{list-style:none;margin:0;padding:0}
+  .updates li{padding:18px 0;border-bottom:1px solid var(--line);font-size:17.5px}
+  .updates li:first-child{border-top:1px solid var(--line)}
+  .updates .date{color:var(--muted);font-size:.85rem;display:block;letter-spacing:.02em}
+  .updates a{font-weight:650}
+
+  /* essentials: big quiet rows instead of a card wall */
+  .essay-list{display:grid}
+  @media(min-width:760px){.essay-list{grid-template-columns:1fr 1fr;column-gap:56px}}
+  .essay-item{display:block;text-decoration:none;color:var(--ink);padding:26px 0 24px;border-top:1px solid var(--line)}
+  .essay-item h3{font-size:21px;line-height:1.3;margin-bottom:7px;transition:color .15s}
+  .essay-item p{font-size:15.5px;color:var(--muted)}
+  .essay-item:hover h3{color:var(--red)}
+
+  /* dishes: borderless grid, hairline tops only */
+  .dish-grid{display:grid;gap:14px 56px}
+  @media(min-width:760px){.dish-grid{grid-template-columns:1fr 1fr}}
+  .dish-item{display:block;text-decoration:none;color:var(--ink);padding:24px 0 20px;border-top:1px solid var(--line)}
+  .dish-item h3{font-size:21px;margin-bottom:7px;transition:color .15s}
+  .dish-item p{font-size:15.5px;color:var(--muted)}
+  .dish-item:hover h3{color:var(--red)}
+
+  /* allergy link list (carried from v1, roomier) */
+  .link-list{list-style:none;margin:0;padding:0}
+  .link-list li{padding:20px 0;border-bottom:1px solid var(--line)}
+  .link-list li:first-child{border-top:1px solid var(--line)}
+  .link-list a{font-weight:650;font-size:18.5px}
+  .link-list p{margin:5px 0 0;color:var(--muted)}
+
+  /* dark app band */
+  .app-band{background:var(--ink);color:#eee}
+  .app-band h2{color:#fff}
+  .app-band .sub{color:#c9c4bb}
+  .app-band .micro{color:#a49e94}
+  .app-band .flow-photo img{border-radius:18px}
+  .app-features{list-style:none;margin:0 0 26px;padding:0}
+  .app-features li{padding:13px 0;border-top:1px solid #3a3a3a;font-size:16px;color:#ddd}
+  .app-features li strong{color:#fff;display:block;font-size:16.5px;margin-bottom:2px}
+  .app-shots{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}
+  .app-shots img{width:100%;height:auto;display:block;border-radius:18px}
+  .app-shots .shot-main{grid-column:1/-1}
+  .app-shots figcaption{grid-column:1/-1;color:#a49e94;font-size:13.5px;margin-top:2px}
+  .micro{font-size:14px;color:var(--muted);margin-top:14px}
+
+  /* faq (same behaviour as live; dark variant inside the app band) */
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:18px 20px}
+  .faq summary{font-weight:700;cursor:pointer;font-size:16.5px}
+  .faq details p{margin-top:10px;color:var(--muted);font-size:15.5px}
+  .app-band .faq details{background:#232323;border-color:#3a3a3a}
+  .app-band .faq summary{color:#fff}
+  .app-band .faq details p{color:#c9c4bb}
+
+  /* closing statement */
+  .statement{max-width:760px}
+  .statement p{font-size:18.5px}
+
+  /* footer (same as live) */
+  footer{background:var(--ink);color:#999;padding:44px 0;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer a{color:#ccc;text-decoration:none}
+</style>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -125,37 +256,71 @@
   </div>
 </header>
 
+<main>
+
 <section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">🇯🇵 KNOWLEDGE FOR FIRST-TIME VISITORS</span>
-    <h1>Understand Japan<br>before you land.</h1>
-    <p class="lede">How ordering actually works. What the dish in front of you is. What to do when there's no WiFi. Practical knowledge for travelers — no fluff, no listicles.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401">Download on the App Store</a>
-      <a class="btn btn-ghost" href="/guides/japanese-food-allergy-card-printable/">Printable allergy card</a>
+  <div class="hero-media">
+    <img src="/images/kabukicho-night.jpg" alt="The Kabukicho Ichibangai gate in Shinjuku, Tokyo at night — a red neon arch over a narrow street of restaurants and bars" width="1600" height="1200" fetchpriority="high">
+    <div class="hero-shade"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="wrap-wide">
+      <h1>First time in Japan, and you don't speak Japanese?</h1>
+      <p class="lede">That's fine — most of Japan runs on ticket machines, picture menus and pointing. What you need is to know how things work before you're standing in front of them: how to order food, what the dish in front of you actually is, and how to explain an allergy to someone who doesn't speak your language. That's what this site is for.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#app">Meet the app: Japan Interpreter ↓</a>
+        <a class="btn btn-light" href="/guides/japanese-food-allergy-card-printable/">Printable allergy card</a>
+      </div>
+      <p class="hero-caption">Kabukicho Ichibangai, Shinjuku, Tokyo — photographed on a JapanMust trip, December 2016.</p>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="wrap">
+  <div class="wrap-wide">
+    <div class="flow-row">
+      <div class="flow-text">
+        <h2>Built from actual trips, not a content calendar</h2>
+        <p class="body-copy">JapanMust covers the moments that actually cause trouble on a first trip: a ramen ticket machine with no English button, a menu with no pictures, a waiter standing there while you try to explain a peanut allergy. Each guide walks through one of those moments, step by step.</p>
+        <p class="body-copy">The photos on this page are ours, taken in Tokyo and Kyoto in December 2016 — the Kabukicho street above, and the great torii at Meiji Jingu below. The guides are written the same way the photos were taken: by someone who stood there first, confused, and worked it out.</p>
+      </div>
+      <figure class="flow-photo">
+        <img src="/images/meiji-jingu-torii.jpg" alt="The great wooden torii gate at the entrance to Meiji Jingu shrine in Tokyo, with visitors walking underneath" width="1200" height="900" loading="lazy">
+        <figcaption class="photo-caption">Meiji Jingu's great torii, Tokyo, December 2016.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:72px">
+    <h2>Recently added</h2>
+    <ul class="updates">
+      <li><span class="date">Nov 23, 2026</span><a href="/guides/without-speaking-japanese/">Visiting Japan without speaking Japanese</a> — the full survival guide: menus, machines, directions, allergies, emergencies.</li>
+      <li><span class="date">Nov 23, 2026</span><a href="/guides/sesame-allergy-japan-restaurant-card/">Sesame allergy restaurant card</a> — sesame hides in dressings, spice mixes and frying oil.</li>
+      <li><span class="date">Nov 23, 2026</span><a href="/guides/does-japanese-curry-have-dairy/">Does Japanese curry have dairy?</a> — what's actually in the roux.</li>
+      <li><span class="date">Nov 23, 2026</span><a href="/guides/vegetarian-vegan-japan-restaurant-card/">Vegetarian &amp; vegan restaurant card</a> — starting with the fish stock nobody mentions.</li>
+      <li><span class="date">Nov 23, 2026</span><a href="/guides/halal-food-japan-restaurant-card/">Halal food in Japan: restaurant card</a> — pork, lard, mirin and sake, and what to ask.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap-wide">
     <h2>Start with the essentials</h2>
-    <p class="sub">The guides travelers ask for most.</p>
-    <div class="hub-grid">
-      <a class="hub-card" href="/guides/how-to-order-ramen/">
-        <h3>🍜 How to order ramen without speaking Japanese</h3>
+    <p class="sub">Ordering food is where most first-timers get stuck, so that's where this site starts.</p>
+    <div class="essay-list">
+      <a class="essay-item" href="/guides/how-to-order-ramen/">
+        <h3>How to order ramen without speaking Japanese</h3>
         <p>Ticket machines, noren curtains, and the 5 phrases that cover 90% of ramen shops.</p>
       </a>
-      <a class="hub-card" href="/guides/izakaya-guide/">
-        <h3>🏮 Izakaya for first-timers</h3>
+      <a class="essay-item" href="/guides/izakaya-guide/">
+        <h3>Izakaya for first-timers</h3>
         <p>How it works, how to pay, and what that surprise appetizer on your bill is.</p>
       </a>
-      <a class="hub-card" href="/guides/english-menus/">
-        <h3>📋 Do restaurants in Japan have English menus?</h3>
+      <a class="essay-item" href="/guides/english-menus/">
+        <h3>Do restaurants in Japan have English menus?</h3>
         <p>The honest answer, by restaurant type — and what to do when they don't.</p>
       </a>
-      <a class="hub-card" href="/guides/no-wifi-survival/">
-        <h3>📵 No WiFi in Japan: the offline survival kit</h3>
+      <a class="essay-item" href="/guides/no-wifi-survival/">
+        <h3>No WiFi in Japan: the offline survival kit</h3>
         <p>What to download and prepare before you fly, so no signal never ruins a day.</p>
       </a>
     </div>
@@ -165,24 +330,29 @@
   </div>
 </section>
 
-<section class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-  <div class="wrap">
+<figure class="photo-band">
+  <img src="/images/teishoku-table.jpg" alt="A Japanese set meal on a restaurant table: a bowl of udon topped with a raw egg yolk, miso soup, fried fish and small side dishes on a tray" width="1600" height="1200" loading="lazy">
+  <figcaption class="band-caption">A set meal on the table — udon, miso soup, fried fish and small plates, December 2016.</figcaption>
+</figure>
+
+<section class="section">
+  <div class="wrap-wide">
     <h2>Dishes, explained</h2>
     <p class="sub">Not word-for-word translations — what the dish <em>actually</em> is, what's inside, raw or cooked, spicy or not.</p>
-    <div class="hub-grid">
-      <a class="hub-card" href="/dishes/oyakodon/">
+    <div class="dish-grid">
+      <a class="dish-item" href="/dishes/oyakodon/">
         <h3>親子丼 · Oyakodon</h3>
         <p>Chicken &amp; egg rice bowl — and why translators call it "parent and child bowl".</p>
       </a>
-      <a class="hub-card" href="/dishes/tonkotsu-ramen/">
+      <a class="dish-item" href="/dishes/tonkotsu-ramen/">
         <h3>豚骨ラーメン · Tonkotsu Ramen</h3>
         <p>The 18-hour pork broth, and how to customize your bowl like a regular.</p>
       </a>
-      <a class="hub-card" href="/dishes/takoyaki/">
+      <a class="dish-item" href="/dishes/takoyaki/">
         <h3>たこ焼き · Takoyaki</h3>
         <p>Octopus balls from Osaka — what's inside, how to eat them without burning your mouth.</p>
       </a>
-      <a class="hub-card" href="/dishes/yakitori/">
+      <a class="dish-item" href="/dishes/yakitori/">
         <h3>焼き鳥 · Yakitori</h3>
         <p>It's not all "chicken skewers" — the cuts, the tare vs shio choice.</p>
       </a>
@@ -193,58 +363,76 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding-top:0">
   <div class="wrap">
     <h2>Allergy cards &amp; phrases for Japan</h2>
     <p class="sub">Show your phone or print a card. Written Japanese beats spoken attempts when an allergy is on the line.</p>
-    <div class="hub-grid">
-      <a class="hub-card" href="/guides/japanese-food-allergy-card-printable/">
-        <h3>🖨️ Printable Japanese food allergy card</h3>
+    <ul class="link-list">
+      <li>
+        <a href="/guides/japanese-food-allergy-card-printable/">Printable Japanese food allergy card</a>
         <p>Pick your allergens, print one card, hand it to the staff.</p>
-      </a>
-      <a class="hub-card" href="/guides/peanut-allergy-japan-restaurant-card/">
-        <h3>🥜 Peanut allergy in Japan</h3>
+      </li>
+      <li>
+        <a href="/guides/peanut-allergy-japan-restaurant-card/">Peanut allergy in Japan</a>
         <p>Where peanuts hide, and a restaurant card that says it clearly.</p>
-      </a>
-      <a class="hub-card" href="/guides/shellfish-allergy-japanese-phrases/">
-        <h3>🦐 "I'm allergic to shellfish" in Japanese</h3>
+      </li>
+      <li>
+        <a href="/guides/shellfish-allergy-japanese-phrases/">"I'm allergic to shellfish" in Japanese</a>
         <p>Shrimp, crab and shellfish phrases plus the dishes to watch.</p>
-      </a>
-      <a class="hub-card" href="/guides/gluten-free-japan-restaurant-card/">
-        <h3>🌾 Gluten-free in Japan</h3>
+      </li>
+      <li>
+        <a href="/guides/gluten-free-japan-restaurant-card/">Gluten-free in Japan</a>
         <p>Soy sauce contains wheat — and the rest of what to know.</p>
-      </a>
-    </div>
+      </li>
+    </ul>
     <div class="btn-row">
       <a href="/guides/" class="btn btn-ghost">All allergy guides →</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="waitlist" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-  <div class="wrap" style="max-width:760px">
-    <h2>Japan Interpreter: the offline menu app</h2>
-    <p class="sub">Point your camera at a Japanese menu and get plain-English explanations of each dish, with common allergens flagged. Text and camera translation keep working with no WiFi once your language resources are downloaded.</p>
-    <div class="btn-row" style="margin-top:0">
-      <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401">Download on the App Store</a>
-    </div>
-    <p class="micro">Basic features are free. Allergen flags help, but never replace asking the restaurant.</p>
-    <div class="faq" style="margin-top:26px">
-      <details><summary>Does Japan Interpreter work without WiFi?</summary><p>Text and camera translation run on your phone using language resources you download in advance, so they keep working offline once set up. Download the Japanese resources on WiFi before your trip. Voice recognition offline depends on your phone, operating system and language, so test it before you travel.</p></details>
-      <details><summary>Can the app tell me which dishes contain allergens?</summary><p>It is built to explain menu items and flag common allergens, but a menu description is never a guarantee of what is in the food. For a serious allergy, always show the restaurant a written allergy card and confirm with staff.</p></details>
-      <details><summary>How much does Japan Interpreter cost?</summary><p>Basic features stay free. A 120-hour full-feature trial starts with your first translation, and microphone translation afterwards needs Lifetime Premium, a one-time purchase (US reference price $6.99) with no subscription.</p></details>
-      <details><summary>When can I download it?</summary><p>It's available now — <a href="https://apps.apple.com/us/app/japan-interpreter/id6824141401">download Japan Interpreter on the App Store</a>.</p></details>
+<section class="section app-band" id="app">
+  <div class="wrap-wide">
+    <div class="flow-row flip">
+      <div class="flow-text">
+        <h2>Japan Interpreter: the offline menu app</h2>
+        <p class="sub">Point your camera at a Japanese menu and get plain-English explanations of each dish, with common allergens flagged. Text and camera translation keep working with no WiFi once your language resources are downloaded.</p>
+        <ul class="app-features">
+          <li><strong>Camera menu translation</strong>Photograph a menu and see each dish in plain English — what it is, not just what it's called.</li>
+          <li><strong>Text translation</strong>Type or paste English or Japanese and translate either way, offline once the resources are on your phone.</li>
+          <li><strong>Voice interpreter</strong>Speak into the phone to talk with staff at restaurants, hotels and shops.</li>
+          <li><strong>Knowledge built in</strong>Dish explanations and common-allergen flags, drawn from the same guides on this site.</li>
+        </ul>
+        <div class="btn-row" style="margin-top:0">
+          <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401" data-app-cta>Download on the App Store</a>
+        </div>
+        <p class="micro">Basic features are free. Allergen flags help, but never replace asking the restaurant.</p>
+        <div class="faq" style="margin-top:30px">
+          <details><summary>Does Japan Interpreter work without WiFi?</summary><p>Text and camera translation run on your phone using language resources you download in advance, so they keep working offline once set up. Download the Japanese resources on WiFi before your trip. Voice recognition offline depends on your phone, operating system and language, so test it before you travel.</p></details>
+          <details><summary>Can the app tell me which dishes contain allergens?</summary><p>It is built to explain menu items and flag common allergens, but a menu description is never a guarantee of what is in the food. For a serious allergy, always show the restaurant a written allergy card and confirm with staff.</p></details>
+          <details><summary>How much does Japan Interpreter cost?</summary><p>Basic features stay free. A 120-hour full-feature trial starts with your first translation, and microphone translation afterwards needs Lifetime Premium, a one-time purchase (US reference price $6.99) with no subscription.</p></details>
+          <details><summary>When can I download it?</summary><p>It's available now — <a href="https://apps.apple.com/us/app/japan-interpreter/id6824141401">download Japan Interpreter on the App Store</a>.</p></details>
+        </div>
+      </div>
+      <figure class="app-shots">
+        <img class="shot-main" src="/images/app-shot-camera.jpg" alt="Japan Interpreter's camera screen reading a Japanese lunch menu and explaining each dish in English" width="378" height="732" loading="lazy">
+        <img src="/images/app-shot-voice.jpg" alt="Japan Interpreter voice screen translating the spoken phrase 'How are you today' into Japanese" width="458" height="996" loading="lazy">
+        <img src="/images/app-shot-home.jpg" alt="Japan Interpreter home screen with Text, Camera, Voice and Knowledge tools" width="458" height="996" loading="lazy">
+        <figcaption>Actual app screens: menu camera, voice interpreter, and the home screen.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="wrap" style="max-width:760px">
+  <div class="wrap statement">
     <h2>What is JapanMust?</h2>
-    <p style="color:var(--muted)">JapanMust is a knowledge project for travelers visiting Japan. We explain the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. Every guide is written from real experience, and every dish explanation tells you what's actually in front of you — not a dictionary guess.</p>
-    <p style="color:var(--muted)">New guides and dishes are added regularly. If there's something you want explained, <a href="mailto:hello@japanmust.com">tell us</a>.</p>
+    <p style="color:var(--muted)">JapanMust explains the things that confuse first-time visitors most: restaurant systems, menus, dishes, and everyday logistics. So far that's 24 guides and 10 dish pages, including printable allergy cards you can hand to restaurant staff — and every dish page tells you what's actually in front of you: what's inside, raw or cooked, spicy or not.</p>
+    <p style="color:var(--muted)">New pages go up when there's something new worth explaining — the latest five are listed near the top of this page. If there's something you want explained, <a href="mailto:hello@japanmust.com">tell us</a>.</p>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
