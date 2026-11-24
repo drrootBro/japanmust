@@ -148,6 +148,17 @@
   footer{background:var(--ink);color:#999;padding:44px 0;font-size:14px}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
   footer a{color:#ccc;text-decoration:none}
+  /* mobile hero: split layout — photo band on top, headline on solid dark below.
+     The Kabukicho gate spans the whole photo, so overlay text is unreadable
+     at phone widths no matter the crop (owner report 2026-11-24). */
+  @media(max-width:700px){
+    .hero{min-height:0;display:block}
+    .hero-media{position:relative;height:290px}
+    .hero-media img{object-position:center 30%}
+    .hero-shade{display:none}
+    .hero-inner{padding:28px 0 32px}
+    .hero-caption{margin-top:26px;text-align:left}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -268,7 +279,7 @@
       <h1>First time in Japan, and you don't speak Japanese?</h1>
       <p class="lede">That's fine — most of Japan runs on ticket machines, picture menus and pointing. What you need is to know how things work before you're standing in front of them: how to order food, what the dish in front of you actually is, and how to explain an allergy to someone who doesn't speak your language. That's what this site is for.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="#app">Meet the app: Japan Interpreter ↓</a>
+        <a class="btn btn-primary" href="/app/">Meet the app: Japan Interpreter →</a>
         <a class="btn btn-light" href="/guides/japanese-food-allergy-card-printable/">Printable allergy card</a>
       </div>
       <p class="hero-caption">Kabukicho Ichibangai, Shinjuku, Tokyo — photographed on a JapanMust trip, December 2016.</p>
@@ -407,6 +418,7 @@
           <a class="btn btn-primary" href="https://apps.apple.com/us/app/japan-interpreter/id6824141401" data-app-cta>Download on the App Store</a>
         </div>
         <p class="micro">Basic features are free. Allergen flags help, but never replace asking the restaurant.</p>
+        <p class="micro"><a href="/app/">More about the app — features, how it works, pricing &amp; FAQ →</a></p>
         <div class="faq" style="margin-top:30px">
           <details><summary>Does Japan Interpreter work without WiFi?</summary><p>Text and camera translation run on your phone using language resources you download in advance, so they keep working offline once set up. Download the Japanese resources on WiFi before your trip. Voice recognition offline depends on your phone, operating system and language, so test it before you travel.</p></details>
           <details><summary>Can the app tell me which dishes contain allergens?</summary><p>It is built to explain menu items and flag common allergens, but a menu description is never a guarantee of what is in the food. For a serious allergy, always show the restaurant a written allergy card and confirm with staff.</p></details>
@@ -438,9 +450,6 @@
   <div class="wrap">
     <div>© 2026 JapanMust · Japan travel knowledge</div>
     <div><a href="/guides/">Guides</a> · <a href="/dishes/">Dishes</a> · <a href="/privacy/">Privacy</a> · <a href="/support/">Support</a> · <a href="/terms/">Terms</a> · <a href="mailto:hello@japanmust.com">Contact</a></div>
-    <a href="https://itravelnet.com/" title="itravelnet.com - Travel directory">itravelnet.com</a> ·
-<a href="https://bookmarktravel.com/" title="bookmarktravel.com - A directory of all things travel">bookmarktravel.com</a>
-
   </div>
 </footer>
 </body>
